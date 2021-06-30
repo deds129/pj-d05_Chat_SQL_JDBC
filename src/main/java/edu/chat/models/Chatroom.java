@@ -1,11 +1,15 @@
 package edu.chat.models;
 
-import java.util.ArrayList;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
 import java.util.List;
 
+@ToString
+@EqualsAndHashCode
 public class Chatroom {
-    private int id;
+    private Long id;
     private String name;
     private User owner;
-    List<Message> chatroomMessages = new ArrayList<>();
+    private List<Message> chatroomMessages;
 }
