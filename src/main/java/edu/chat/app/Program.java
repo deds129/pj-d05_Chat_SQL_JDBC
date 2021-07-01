@@ -1,5 +1,8 @@
 package edu.chat.app;
 
+import edu.chat.repositories.MessagesRepository;
+import edu.chat.repositories.MessagesRepositoryJdbcImpl;
+
 import java.sql.*;
 
 /**
@@ -19,11 +22,16 @@ public class Program {
     static final String PASSWORD = "postgres";
 
     public static void main(String[] args) {
+
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         try {
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(DATABASE_URL, USER, PASSWORD);
+
+
+            MessagesRepository messagesRepository = new MessagesRepositoryJdbcImpl(connection);
+
             String SQL = null;
             ResultSet resultSet = null;
 
@@ -48,8 +56,6 @@ public class Program {
             int id = resultSet.getInt("user_id");
             String login = resultSet.getString("user_login");
             String password = resultSet.getString("user_password");
-
-
             System.out.println("\n================\n");
             System.out.println("id: " + id);
             System.out.println("login: " + login);

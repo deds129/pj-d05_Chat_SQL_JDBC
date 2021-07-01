@@ -12,4 +12,10 @@ public class Chatroom {
     private String name;
     private User owner;
     private List<Message> chatroomMessages;
+
+    public Chatroom(Long id, String name, User owner) {
+        this.id = id;
+        this.name = name;
+        this.owner = owner;
+    }
 }

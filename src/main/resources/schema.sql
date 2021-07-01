@@ -1,3 +1,5 @@
+/*CREATE DATABASE chat_db*/
+
 CREATE TABLE users(
     user_id BIGSERIAL NOT NULL PRIMARY KEY,
     user_login VARCHAR(50) NOT NULL,

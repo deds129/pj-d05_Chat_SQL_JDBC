@@ -10,6 +10,7 @@ import java.util.Optional;
 
 public class MessagesRepositoryJdbcImpl implements MessagesRepository {
 
+
     private final Connection connection;
 
     public MessagesRepositoryJdbcImpl(@NotNull Connection connection) throws SQLException {
@@ -33,6 +34,11 @@ public class MessagesRepositoryJdbcImpl implements MessagesRepository {
 
     @Override
     public void update(Message message) {
+
+    }
+
+    @Override
+    public void add(Message message) {
 
     }
 

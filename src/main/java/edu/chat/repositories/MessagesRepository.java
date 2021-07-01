@@ -10,5 +10,6 @@ public interface MessagesRepository {
     void delete (Message message);
     void save(Message message);
     void update(Message message);
+    void add(Message message);
     List<Message> findAll();
 }
