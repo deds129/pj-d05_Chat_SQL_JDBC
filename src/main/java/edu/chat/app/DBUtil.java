@@ -8,15 +8,12 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class DBUtil {
-    /**
-     * JDBC Driver and database url
-     */
     static final String DATABASE_URL = "jdbc:postgresql://localhost:5432/chat_db";
     static final String USER = "postgres";
     static final String PASSWORD = "postgres";
     static final String DB_DRIVER = "org.postgresql.Driver";
 
-    private static HikariDataSource dataSource;
+    private static final HikariDataSource dataSource;
 
     static {
         HikariConfig config = new HikariConfig();
@@ -31,7 +28,5 @@ public class DBUtil {
     public static Connection getConnection() throws SQLException {
         return dataSource.getConnection();
     }
-
-
 
 }
