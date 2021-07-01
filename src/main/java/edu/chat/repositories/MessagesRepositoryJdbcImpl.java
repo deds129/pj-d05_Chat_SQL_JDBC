@@ -13,10 +13,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class MessagesRepositoryJdbcImpl implements MessagesRepository {
-
-    @NotNull
-    private final Connection connection;
-
     public MessagesRepositoryJdbcImpl(DataSource dataSource) throws SQLException {
 
     }

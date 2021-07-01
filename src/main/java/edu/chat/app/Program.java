@@ -14,7 +14,11 @@ public class Program {
 
     public static void main(String[] args) {
 
-
+        try {
+            MessagesRepository messagesRepository = new MessagesRepositoryJdbcImpl(DBUtil.getConnection());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
     }
 

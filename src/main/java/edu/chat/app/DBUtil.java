@@ -1,10 +1,8 @@
 package edu.chat.app;
 
-
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;;
-import java.sql.Connection;
-
+import javax.sql.DataSource;
 import java.sql.SQLException;
 
 public class DBUtil {
@@ -13,20 +11,15 @@ public class DBUtil {
     static final String PASSWORD = "postgres";
     static final String DB_DRIVER = "org.postgresql.Driver";
 
-    private static final HikariDataSource dataSource;
-
+   private static final HikariConfig config = new HikariConfig();
     static {
-        HikariConfig config = new HikariConfig();
-
         config.setJdbcUrl(DATABASE_URL);
         config.setUsername(USER);
         config.setPassword(PASSWORD);
         config.setDriverClassName(DB_DRIVER);
-        dataSource = new HikariDataSource(config);
     }
 
-    public static Connection getConnection() throws SQLException {
-        return dataSource.getConnection();
+    public static DataSource getConnection() throws SQLException {
+        return new HikariDataSource(config);
     }
-
 }
