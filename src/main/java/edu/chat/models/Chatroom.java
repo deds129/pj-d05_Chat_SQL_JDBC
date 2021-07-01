@@ -1,6 +1,7 @@
 package edu.chat.models;
 
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.ToString;
 
 import java.util.List;
@@ -8,10 +9,10 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 public class Chatroom {
-    private Long id;
-    private String name;
-    private User owner;
-    private List<Message> chatroomMessages;
+    @Getter private Long id;
+    @Getter private String name;
+    @Getter private User owner;
+    @Getter private List<Message> chatroomMessages;
 
     public Chatroom(Long id, String name, User owner) {
         this.id = id;

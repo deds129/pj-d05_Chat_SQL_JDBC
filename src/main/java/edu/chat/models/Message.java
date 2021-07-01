@@ -2,6 +2,7 @@ package edu.chat.models;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.ToString;
 
 import java.util.Date;
@@ -11,9 +12,9 @@ import java.util.Date;
 @EqualsAndHashCode
 public class Message {
 
-    private Long id;
-    private User author;
-    private Chatroom room;
-    private String text;
-    private Date messageDate;
+    @Getter private final Long id;
+    @Getter private final User author;
+    @Getter private final Chatroom room;
+    @Getter private final String text;
+    @Getter  private final Date messageDate;
 }
