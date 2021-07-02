@@ -9,9 +9,9 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 public class Chatroom {
-    @Getter private Long id;
-    @Getter private String name;
-    @Getter private User owner;
+    @Getter private final Long id;
+    @Getter private final String name;
+    @Getter private final User owner;
     @Getter private List<Message> chatroomMessages;
 
     public Chatroom(Long id, String name, User owner) {

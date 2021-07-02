@@ -2,7 +2,6 @@ package edu.chat.models;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 import java.util.List;
 
@@ -17,9 +16,9 @@ public class User {
         this.password = password;
     }
 
-    @Getter private Long id;
-    @Getter private String login;
-    @Getter private String password;
+    @Getter private final Long id;
+    @Getter private final String login;
+    @Getter private final String password;
 
     private List<Chatroom> createdRooms;
     private List<Chatroom> activeRooms;

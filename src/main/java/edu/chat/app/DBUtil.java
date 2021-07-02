@@ -3,8 +3,6 @@ package edu.chat.app;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import javax.sql.DataSource;
-import java.sql.SQLException;
-
 public class DBUtil {
     static final String DATABASE_URL = "jdbc:postgresql://localhost:5432/chat_db";
     static final String USER = "postgres";
@@ -19,7 +17,7 @@ public class DBUtil {
         config.setDriverClassName(DB_DRIVER);
     }
 
-    public static DataSource getDataSource() throws SQLException {
+    public static DataSource getDataSource()  {
         return new HikariDataSource(config);
     }
 }
