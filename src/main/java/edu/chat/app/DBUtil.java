@@ -1,7 +1,7 @@
 package edu.chat.app;
 
 import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;;
+import com.zaxxer.hikari.HikariDataSource;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
@@ -19,7 +19,7 @@ public class DBUtil {
         config.setDriverClassName(DB_DRIVER);
     }
 
-    public static DataSource getConnection() throws SQLException {
+    public static DataSource getDataSource() throws SQLException {
         return new HikariDataSource(config);
     }
 }

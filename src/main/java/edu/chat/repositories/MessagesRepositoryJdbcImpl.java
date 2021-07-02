@@ -1,20 +1,17 @@
 package edu.chat.repositories;
 
-import com.sun.corba.se.spi.ior.IORTemplate;
-import com.sun.istack.internal.NotNull;
+import edu.chat.app.DBUtil;
 import edu.chat.models.Message;
-import edu.chat.models.User;
-
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 public class MessagesRepositoryJdbcImpl implements MessagesRepository {
+    Connection connection = null;
     public MessagesRepositoryJdbcImpl(DataSource dataSource) throws SQLException {
-
+         connection = dataSource.getConnection();
     }
 
     @Override
@@ -31,7 +28,7 @@ public class MessagesRepositoryJdbcImpl implements MessagesRepository {
                 int msg_room = resultSet.getInt("message_room");
                 String msg_text = resultSet.getString("message_text");
                 Date msg_date = resultSet.getDate("message_date");
-
+                System.out.println(msg_id);
                // add(new Message(msg_id, getUserById(msg_author), getRoomById(msg_room), msg_text, msg_date));
 
 
