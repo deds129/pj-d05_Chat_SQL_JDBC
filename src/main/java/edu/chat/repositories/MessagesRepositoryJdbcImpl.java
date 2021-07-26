@@ -1,7 +1,8 @@
 package edu.chat.repositories;
-
-import edu.chat.app.DBUtil;
+import edu.chat.models.Chatroom;
 import edu.chat.models.Message;
+import edu.chat.models.User;
+
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,73 +15,49 @@ public class MessagesRepositoryJdbcImpl implements MessagesRepository {
          connection = dataSource.getConnection();
     }
 
-    @Override
-    public List<Message> findAll() {
 
-        List<Message> messageList = new ArrayList<>();
-        String SQL = "SELECT * FROM messages";
-        try(PreparedStatement statement = connection.prepareStatement(SQL)) {
-            ResultSet resultSet = statement.executeQuery();
+
+    @Override
+    public Optional<Message> findById(int id) {
+
+        Message message = null;
+        ResultSet resultSet = null;
+        String SQL = "SELECT * FROM messages " +
+                "JOIN users u ON u.user_id = messages.message_author " +
+                "JOIN chatrooms c on c.chatroom_id = messages.message_room " +
+                "JOIN users u2 on u2.user_id = c.chatroom_owner_id " +
+                "WHERE message_id = (?)";
+
+
+
+        try(PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
+            preparedStatement.setInt(1, Math.toIntExact(id));
+            resultSet = preparedStatement.executeQuery();
             while (resultSet.next())
             {
-                int msg_id = resultSet.getInt("message_id");
-                int msg_author = resultSet.getInt("message_author");
-                int msg_room = resultSet.getInt("message_room");
-                String msg_text = resultSet.getString("message_text");
-                Date msg_date = resultSet.getDate("message_date");
-                System.out.println(msg_id);
-               // add(new Message(msg_id, getUserById(msg_author), getRoomById(msg_room), msg_text, msg_date));
+              message = new Message(
+                        resultSet.getInt("message_id"),
 
+                        new User(resultSet.getInt("message_author"),
+                        resultSet.getString("user_login"),
+                        resultSet.getString("user_password")),
 
+                        new Chatroom(resultSet.getInt("chatroom_id"),
+                                resultSet.getString("chatroom_name"),
+                                new User(resultSet.getInt("chatroom_owner_id"),
+                                        resultSet.getString("user_login"),
+                                        resultSet.getString("user_password")
+                                )),
+                        resultSet.getString("message_text"),
+                        resultSet.getDate("message_date")
+
+                );
             }
         }catch (SQLException e){
             e.printStackTrace();
         }
-        return null;
+        return Optional.of(message);
     }
 
-    @Override
-    public Optional<Message> findById(Long id) {
-        return Optional.empty();
-    }
 
-    @Override
-    public void delete(Message message) {
-
-    }
-
-    @Override
-    public void save(Message message) {
-
-    }
-
-    @Override
-    public void update(Message message) {
-
-    }
-
-    @Override
-    public void add(Message message) {
-
-    }
-/*
-// Class.forName("org.postgresql.Driver");
-    connection = DriverManager.getConnection(DATABASE_URL, USER, PASSWORD);
-
-
-    MessagesRepository messagesRepository = new MessagesRepositoryJdbcImpl(connection);
-
-    String SQL = null;
-    ResultSet resultSet = null;
-
-    SQL = "SELECT * FROM users";
-    preparedStatement = connection.prepareStatement(SQL);
-
-    resultSet = preparedStatement.executeQuery();
-    outRequestResult(resultSet);
-
-            preparedStatement.close();
-            connection.close();
-
- */
 }

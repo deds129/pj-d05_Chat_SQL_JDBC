@@ -8,11 +8,11 @@ import lombok.ToString;
 import java.util.Date;
 
 @AllArgsConstructor
-@ToString
 @EqualsAndHashCode
+@ToString
 public class Message {
 
-    @Getter private final Long id;
+    @Getter private final int  id;
     @Getter private final User author;
     @Getter private final Chatroom room;
     @Getter private final String text;

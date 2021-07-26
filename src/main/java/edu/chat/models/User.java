@@ -9,21 +9,18 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 public class User {
+    @Getter private final int  id;
+    @Getter private final String login;
+    @Getter private final String password;
 
-    public User(Long id, String login, String password) {
+    public User(int id, String login, String password) {
         this.id = id;
         this.login = login;
         this.password = password;
     }
 
-    @Getter private final Long id;
-    @Getter private final String login;
-    @Getter private final String password;
 
     private List<Chatroom> createdRooms;
     private List<Chatroom> activeRooms;
-
-//    public User getUserById(Long id) {
-//    }
 
 }
